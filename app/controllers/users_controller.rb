@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    # byebug
 
     render json: @users
   end
@@ -12,8 +13,20 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(strong_params)
+    # byebug
 
-    render json: @user
+
+    if @user.valid?
+      token = JWT.encode({ user_id: @user.id}, "SECRET")
+      # render json: {id: @user.id, username: @user.username }
+      # render json: @user
+      # byebug
+      render json: {user: @user, jwt: token }
+    else
+      render json: {error: 'WRONG'}, status: 422
+    end
+
+
   end
 
   def show
@@ -36,6 +49,6 @@ class UsersController < ApplicationController
   private
 
   def strong_params
-    params.require(:user).permit(:username, :first_name, :last_name, :password)
+    params.permit(:username, :first_name, :last_name, :password)
   end
 end
