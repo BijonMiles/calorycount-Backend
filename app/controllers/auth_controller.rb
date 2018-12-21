@@ -20,9 +20,8 @@ class AuthController < ApplicationController
     string = request.authorization
 
     token = JWT.decode(string, "SECRET")[0]
-    # byebug
+
     id = token['user_id'].to_i
-    # byebug
     @user = User.find(id)
 
     if @user
