@@ -24,6 +24,8 @@ class AuthController < ApplicationController
     id = token['user_id'].to_i
     @user = User.find(id)
 
+
+
     if @user
       render json: { user_id: @user.id, username: @user.username, first_name: @user.first_name}
     else
