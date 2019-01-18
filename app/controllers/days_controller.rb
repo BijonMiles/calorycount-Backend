@@ -11,7 +11,7 @@ class DaysController < ApplicationController
   end
 
   def create
-    # byebug
+    byebug
     # create a new instance of day
 
     # create all of the Food that belongs to that day
@@ -19,28 +19,31 @@ class DaysController < ApplicationController
     # create  new instances of a food_item - have a category and belong to a day
     # food name, calories, day_id, meal: 'breakfast'
     @day = Day.create(strong_params)
-    # byebug
+    byebug
     params[:breakfast].each do |breakfast_item|
       # byebug
        breakfast_item['food_name']
        @food = Food.create( food_name: breakfast_item['food_name'], day_id: @day['id'], calory: breakfast_item['nf_calories'], meal: "breakfast")
     end
-
+    # byebug
     params[:lunch].each do |breakfast_item|
       # byebug
        breakfast_item['food_name']
        @food = Food.create( food_name: breakfast_item['food_name'], day_id: @day['id'], calory: breakfast_item['nf_calories'], meal: "lunch")
     end
+    # byebug
 
     params[:dinner].each do |breakfast_item|
       # byebug
        breakfast_item['food_name']
        @food = Food.create( food_name: breakfast_item['food_name'], day_id: @day['id'], calory: breakfast_item['nf_calories'], meal: "dinner")
     end
+    # byebug
 
     if @day.valid?
       # byebug
-      render json: @day.format_json
+      # render json: @day.format_json
+      render json: @day
     else
       render json: {error: 'WRONG'}, status: 422
     end
