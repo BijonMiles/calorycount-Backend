@@ -19,7 +19,7 @@ class DaysController < ApplicationController
     # create  new instances of a food_item - have a category and belong to a day
     # food name, calories, day_id, meal: 'breakfast'
     @day = Day.create(strong_params)
-    byebug
+    # byebug
     params[:breakfast].each do |breakfast_item|
       # byebug
        breakfast_item['food_name']

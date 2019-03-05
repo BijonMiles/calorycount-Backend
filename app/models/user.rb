@@ -7,4 +7,6 @@ class User < ApplicationRecord
 
   has_secure_password
   # attr: password, password_confirmation
+
+
 end
